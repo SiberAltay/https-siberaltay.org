@@ -7,7 +7,8 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { UserRound } from "lucide-react";
+import { ArrowLeft, UserRound } from "lucide-react";
+import { Link } from "react-router-dom";
 import { teamMembers } from "../data/team";
 
 const BUBBLE = 84;
@@ -133,36 +134,32 @@ export default function Team() {
   const positions = hexPositions(teamMembers.length);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-paper">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(29,78,216,0.28),transparent_60%)]" />
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-paper">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(29,78,216,0.3),transparent_62%)]" />
 
-      <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-xs tracking-[0.4em] text-blue-300"
+      <motion.div
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute left-5 top-5 z-30 sm:left-8 sm:top-8"
+      >
+        <Link
+          to="/"
+          aria-label="Ana sayfaya dön"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-white"
         >
-          EKİBİMİZ
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 font-serif text-3xl italic sm:text-4xl"
-        >
-          Perde arkasındaki takım
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/60"
-        >
-          Gizlilik bizim işimiz. Ekip üyelerimizin kimlikleri özel tutulur —
-          balonların üzerine gelin, sadece maskelenmiş rumuzları görün.
-        </motion.p>
-      </div>
+          <ArrowLeft size={20} />
+        </Link>
+      </motion.div>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="absolute left-1/2 top-8 z-20 -translate-x-1/2 font-mono text-xs tracking-[0.45em] text-white/50"
+      >
+        EKİBİMİZ
+      </motion.p>
 
       <div
         ref={fieldRef}
@@ -176,7 +173,7 @@ export default function Team() {
           mouseX.set(10000);
           mouseY.set(10000);
         }}
-        className="relative mx-auto mt-10 flex h-[560px] max-w-4xl items-center justify-center sm:h-[640px]"
+        className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-1 items-center justify-center"
       >
         <div className="relative scale-[0.58] sm:scale-75 lg:scale-100">
           {/* Merkez: Altay logosu */}
@@ -216,7 +213,7 @@ export default function Team() {
         </div>
       </div>
 
-      <p className="relative mx-auto max-w-md px-6 text-center font-mono text-[11px] tracking-widest text-white/35">
+      <p className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap px-6 font-mono text-[11px] tracking-widest text-white/35">
         // isimler gizlilik gereği maskelenmiştir
       </p>
     </section>

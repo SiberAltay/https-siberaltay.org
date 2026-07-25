@@ -17,18 +17,23 @@ function ScrollToTop() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-paper">
-        <ScrollToTop />
-        <ScrollProgress />
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/ekibimiz" element={<Team />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="min-h-screen bg-paper">
+              <ScrollProgress />
+              <Navbar />
+              <main>
+                <Home />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
+        <Route path="/ekibimiz" element={<Team />} />
+      </Routes>
     </BrowserRouter>
   );
 }
