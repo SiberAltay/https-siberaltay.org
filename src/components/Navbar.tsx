@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { GithubIcon, InstagramIcon } from "./BrandIcons";
 
-const links = [
-  { href: "#hakkimizda", label: "Hakkımızda" },
-  { href: "#odak-alanlari", label: "Odak Alanları" },
-  { href: "#projeler", label: "Projeler" },
-  { href: "#iletisim", label: "İletişim" },
+const links: { href: string; label: string; route?: boolean }[] = [
+  { href: "/#hakkimizda", label: "Hakkımızda" },
+  { href: "/#odak-alanlari", label: "Odak Alanları" },
+  { href: "/#projeler", label: "Projeler" },
+  { href: "/ekibimiz", label: "Ekibimiz", route: true },
+  { href: "/#iletisim", label: "İletişim" },
 ];
 
 const socials = [
@@ -27,19 +29,27 @@ export default function Navbar() {
     >
       <div className="grid w-full grid-cols-3 items-center px-5 py-4 sm:px-8">
         <nav className="hidden items-center gap-7 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative text-sm text-body transition-colors hover:text-ink"
-            >
-              {link.label}
+          {links.map((link) => {
+            const className =
+              "group relative text-sm text-body transition-colors hover:text-ink";
+            const underline = (
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-ink transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+            );
+            return link.route ? (
+              <Link key={link.href} to={link.href} className={className}>
+                {link.label}
+                {underline}
+              </Link>
+            ) : (
+              <a key={link.href} href={link.href} className={className}>
+                {link.label}
+                {underline}
+              </a>
+            );
+          })}
         </nav>
 
-        <a href="#top" className="flex flex-col items-center justify-self-center">
+        <Link to="/" className="flex flex-col items-center justify-self-center">
           <img
             src="/altaylogo.jpg"
             alt="Altay Takımı"
@@ -48,7 +58,7 @@ export default function Navbar() {
           <span className="mt-1 font-mono text-[10px] font-medium tracking-[0.35em] text-ink">
             ALTAY
           </span>
-        </a>
+        </Link>
 
         <div className="flex items-center justify-self-end">
           <div className="hidden items-center gap-5 md:flex">
@@ -92,16 +102,27 @@ export default function Navbar() {
           className="border-t border-line bg-paper px-6 py-4 md:hidden"
         >
           <div className="flex flex-col gap-4">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="text-sm text-body hover:text-ink"
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.map((link) =>
+              link.route ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-body hover:text-ink"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-body hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              ),
+            )}
           </div>
         </motion.div>
       )}
