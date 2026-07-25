@@ -1,19 +1,25 @@
+import ScrollProgress from "./components/ScrollProgress";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Marquee from "./components/Marquee";
+import Stats from "./components/Stats";
 import About from "./components/About";
 import FocusAreas from "./components/FocusAreas";
-import CommunityCTA from "./components/CommunityCTA";
+import Projects from "./components/Projects";
 import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-ink">
+    <div className="min-h-screen bg-paper">
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
+        <Stats />
         <About />
         <FocusAreas />
-        <CommunityCTA />
+        <Projects />
       </main>
       <Footer />
     </div>

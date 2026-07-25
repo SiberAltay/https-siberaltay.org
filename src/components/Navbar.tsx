@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { GithubIcon, InstagramIcon } from "./BrandIcons";
@@ -6,7 +6,7 @@ import { GithubIcon, InstagramIcon } from "./BrandIcons";
 const links = [
   { href: "#hakkimizda", label: "Hakkımızda" },
   { href: "#odak-alanlari", label: "Odak Alanları" },
-  { href: "#topluluk", label: "Topluluk" },
+  { href: "#projeler", label: "Projeler" },
   { href: "#iletisim", label: "İletişim" },
 ];
 
@@ -16,76 +16,72 @@ const socials = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 z-50 w-full transition-colors duration-300 ${
-        scrolled ? "bg-ink/80 backdrop-blur-lg border-b border-line" : "bg-transparent"
-      }`}
+      className="sticky top-0 z-50 w-full border-b border-line bg-paper"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-3">
-          {/* Takım logosu: /public/logo.svg (veya .png) olarak eklenecek */}
-          <div className="flex h-9 w-9 items-center justify-center rounded-md border border-cyan/40 bg-panel">
-            <img
-              src="/logo.svg"
-              alt="Altay Takımı Logosu"
-              className="h-6 w-6 object-contain"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).style.display = "none";
-              }}
-            />
-          </div>
-          <span className="font-mono text-sm tracking-[0.3em] text-white">
-            ALTAY
-          </span>
-        </a>
-
-        <nav className="hidden items-center gap-8 md:flex">
+      <div className="grid w-full grid-cols-3 items-center px-5 py-4 sm:px-8">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-mist transition-colors hover:text-cyan"
+              className="group relative text-sm text-body transition-colors hover:text-ink"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-ink transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
-          {socials.map(({ href, label, icon: Icon }) => (
+        <a href="#top" className="flex flex-col items-center justify-self-center">
+          <img
+            src="/altaylogo.jpg"
+            alt="Altay Takımı"
+            className="h-8 w-8 rounded-full object-cover"
+          />
+          <span className="mt-1 font-mono text-[10px] font-medium tracking-[0.35em] text-ink">
+            ALTAY
+          </span>
+        </a>
+
+        <div className="flex items-center justify-self-end">
+          <div className="hidden items-center gap-5 md:flex">
+            {socials.map(({ href, label, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="text-body transition-colors hover:text-ink"
+              >
+                <Icon size={17} />
+              </a>
+            ))}
             <a
-              key={label}
-              href={href}
+              href="https://www.sibervatan.org/"
               target="_blank"
               rel="noreferrer"
-              aria-label={label}
-              className="text-mist transition-colors hover:text-cyan"
+              className="rounded-full border border-ink px-4 py-2 text-xs font-medium tracking-wide text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              <Icon size={18} />
+              sibervatan.org
             </a>
-          ))}
-        </div>
+          </div>
 
-        <button
-          className="text-white md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Menüyü aç/kapat"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          <button
+            className="text-ink md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menüyü aç/kapat"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -93,7 +89,7 @@ export default function Navbar() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="border-t border-line bg-ink/95 px-6 py-4 md:hidden"
+          className="border-t border-line bg-paper px-6 py-4 md:hidden"
         >
           <div className="flex flex-col gap-4">
             {links.map((link) => (
@@ -101,7 +97,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-sm text-mist hover:text-cyan"
+                className="text-sm text-body hover:text-ink"
               >
                 {link.label}
               </a>
