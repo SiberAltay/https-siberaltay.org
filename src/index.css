@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #050608;
+  --color-panel: #0a0d12;
+  --color-panel-light: #10141b;
+  --color-line: #1d232c;
+  --color-cyan: #38f0ff;
+  --color-cyan-dim: #1aa9b8;
+  --color-blue: #3b82f6;
+  --color-mist: #8996a6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: #e6ebf0;
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: #04070a;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cyan-dim);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #ffffff 20%, var(--color-cyan) 60%, var(--color-blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(56, 240, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 240, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.noise-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(5, 6, 8, 0.4) 60%, rgba(5, 6, 8, 0.95) 100%);
+}
