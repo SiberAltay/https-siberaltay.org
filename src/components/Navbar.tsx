@@ -9,7 +9,7 @@ const links: { href: string; label: string; route?: boolean }[] = [
   { href: "/#odak-alanlari", label: "Odak Alanları" },
   { href: "/#projeler", label: "Projeler" },
   { href: "/ekibimiz", label: "Ekibimiz", route: true },
-  { href: "/#iletisim", label: "İletişim" },
+  { href: "/#iletisim", label: "Zamazingo" },
 ];
 
 const socials = [
